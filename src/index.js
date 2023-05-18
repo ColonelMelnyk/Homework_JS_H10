@@ -15,7 +15,10 @@ inputEl.addEventListener("input", debounce(onInput, 300));
 function onInput(event){
     event.preventDefault();
     clearingData();
-    const country = event.target.value;
+    const country = event.target.value.trim();
+    if(!country){
+        return;
+    }
     fetchCountries(country).then(data =>{
         if(data.length > 10){
             Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
